@@ -1,5 +1,5 @@
 //Created by Altan
-$(function randomColor()
+function randomColor()
 {
 	var r = Math.floor((Math.random()*255));
 	var g = Math.floor((Math.random()*255));
@@ -28,4 +28,4 @@ $(function randomColor()
 	$('#swatch').css("width", 200);
 	$('#swatch').css("background", rgbHex);
 	//$('#swatch').html(rString + "\n" + gString + "\n" + bString);
-});
+}
