@@ -1,9 +1,34 @@
 <!DOCTYPE HTML>
 
-<html>
-		
-</html>
+<head>
+	<meta charset="utf-8">
+	<title>Hexed!</title>
 
+	<link rel="stylesheet" type="text/css" href="hexed.css">
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/resources/demos/style.css" />
+
+</head>
 <body>
-	
+
+	<div id="all">
+
+		<div id="circle"></div>
+
+		<form>
+			<div class="slider"></div> <div class="input"><input type="text" name="red"><br></div>
+			<div class="slider"></div> <input type="text" name="green"><br>
+			<div class="slider"></div> <input type="text" name="blue">
+		</form>
+
+	</div>
+
+	<script>
+	$(function() {
+		$( ".slider" ).slider();
+	});
+	</script>
 </body>
