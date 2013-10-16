@@ -12,8 +12,8 @@
 	<link rel="stylesheet" href="/resources/demos/style.css" />
 
 </head>
-<body>
-	<script src="hexed.js"></script>
+<body onload="obj.Start()">
+	
 
 	<div id="all">
 
@@ -26,10 +26,15 @@
 		</form>
 
 	</div>
+	
+	<script src="hexed.js"></script>
 
 	<script>
 	$(function() {
 		$( ".slider" ).slider();
 	});
 	</script>
+	
+	<button onclick="obj.Stop()">Got it!</button>
+	<button onclick="">Next!</button> //another turn started (restart to random color, new timer, new sliders)
 </body>
