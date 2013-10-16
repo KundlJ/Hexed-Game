@@ -29,3 +29,53 @@ function randomColor()
 	$('#swatch').css("background", rgbHex);
 	//$('#swatch').html(rString + "\n" + gString + "\n" + bString);
 }
+
+
+//timer class, object, and code------------------------------------------------
+
+//CLASS
+var Timer = function() {
+	//EVENTS
+	this.Interval = 1000; //1 second intervals
+	this.Enable = new Boolean(false); //to start/stop itmer
+	this.Tick; //to enact what to do when the timer is going
+	//PRIVATE VARIABLES
+	var timerId = 0; // to use for setInterval
+	var thisObject; //to refer to self
+	
+	//PUBLIC FUNCTIONS
+	// start timer
+	this.Start = function() {
+		this.Enable = new Boolean(true);
+		thisObject = this;
+		if (thisObject.Enable) {
+			thisObject.timerId = setInterval(function(){thisObject.Tick();},thisObject.Interval);
+		}            //setInterval gives what to do at each interval of alotted time
+	};
+
+	// stop timer 
+	this.Stop = function() {
+		thisObject.Enable = new Boolean(false);
+		clearInterval(thisObject.timerId);
+	};
+};
+
+//timer object and code
+var time = 0;
+var obj = new Timer();
+obj.Interval = 1000;
+obj.Tick = timer_tick;
+function timer_tick() {
+	time = time + 1; //to further the timer
+	if (time < 10) {
+		document.getElementById("txt").innerHTML = "0" + time;
+	}
+	else {
+		document.getElementById("txt").innerHTML = time;
+	}
+};
+
+//problem: make 0 show up before 1 comes up???
+
+
+//---------------------------------------------------------------------------------------------
