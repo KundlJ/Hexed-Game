@@ -47,7 +47,8 @@ function sortByScoreAndDate(array) {
     });
 }
 
-function AddNewScore(newScore)
+//Adds a JSON score object to the local storage
+function AddNewScoreJS(newScore)
 {
   if(supports_html5_storage())
   {
@@ -69,17 +70,27 @@ function AddNewScore(newScore)
   }
 }
 
-/*
-var TestScore =  {
-          "name"        : "derp",
-          "difficulty"  : "medium",
-          "turns"       : 10,
-          "score"       : 9001,
-          "timestamp"   : "2013-11-19"
-};
+//Adds a new score to local storage based on elements
+//Name: Player name, a simple string
+//Difficulty: The difficulty of the game
+//Turns: turns taken to complete
+//Score
+//time: In the form "YEAR-MO-DA, eg 2000-05-30"
+function AddNewScore(name, difficulty, turns, score, time)
+{
+  var NewScore =  {
+          "name"        : name,       
+          "difficulty"  : difficulty,
+          "turns"       : turns,
+          "score"       : score,
+          "timestamp"   : time    
+  };
+  AddNewScoreJS(NewScore);
+}
 
-AddNewScore(TestScore);
-*/
+AddNewScore("derp", "medium", 20, 5000, "2000-10-15");
+console.log(localStorage["HexedHighscores"]);
+
   
   
   
