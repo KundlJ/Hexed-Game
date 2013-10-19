@@ -20,14 +20,14 @@ if(hasStorage)
           "difficulty"  : "hard",
           "turns"       : 5,
           "score"       : 9001,
-          "timestamp"   : "2013-18-10"
+          "timestamp"   : "2013-10-18"
         },     
         {
           "name"        : "Drew",
           "difficulty"  : "easy",
           "turns"       : 10,
           "score"       : 1337,
-          "timestamp"   : "2013-15-10"
+          "timestamp"   : "2013-10-15"
         }     
     ]
   };
