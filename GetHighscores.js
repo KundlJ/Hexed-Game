@@ -6,11 +6,14 @@ function supports_html5_storage() {
   }
 }
 
+function EraseHighScores()
+{
+  localStorage.removeItem("HexedHighscores");
+}
+
 function DisplayHighScores()
 {
-  var hasStorage = supports_html5_storage();
-
-  if(hasStorage)
+  if(supports_html5_storage())
   {
     /*
       Temporarily force data into local storage
@@ -34,7 +37,7 @@ function DisplayHighScores()
       ]
     };
     
-    localStorage.setItem("HexedHighscores", JSON.stringify(testJSON));
+    //localStorage.setItem("HexedHighscores", JSON.stringify(testJSON));
       
     //////////////////////////////////////////////////////////////////
     
@@ -44,9 +47,6 @@ function DisplayHighScores()
       
       var Data = JSON.parse(ScoresString);
       var Scores = Data.HighScores;
-      
-      ScoreList = $('<ol></ol>').appendTo("body");
-      ScoreList.attr('class', 'High Scores');
       
       for(var i = 0; i < Scores.length; i++)
       {
@@ -58,21 +58,23 @@ function DisplayHighScores()
         var scoreData = thisScore.score;
         var timestampData = thisScore.timestamp;
         
-        var newScore = $('<li></li>').appendTo(ScoreList);
+        var newScore = $('<li></li>').appendTo(".HighScores");
+        newScore.attr('class', 'Score');
         
         var dataList = $('<ul></ul>').appendTo(newScore);
+        dataList.attr('class', 'DataList');
         
         var Name = $('<li>' + nameData + '</li>').appendTo(dataList);
         Name.attr('class', 'Name');
+        
+        var Score = $('<li>' + scoreData + '</li>').appendTo(dataList);
+        Score.attr('class', 'Score');
         
         var Difficulty = $('<li>' + difficultyData + '</li>').appendTo(dataList);
         Difficulty.attr('class', 'Difficulty');
         
         var Turns = $('<li>' + turnsData + '</li>').appendTo(dataList);
         Turns.attr('class', 'Turns');
-        
-        var Score = $('<li>' + scoreData + '</li>').appendTo(dataList);
-        Score.attr('class', 'Score');
         
         var Timestamp = $('<li>' + timestampData + '</li>').appendTo(dataList);
         Timestamp.attr('class', 'Timestamp');
@@ -88,5 +90,3 @@ function DisplayHighScores()
     alert("Local Data Not Functioning");
   }
 }
-
-DisplayHighScores();

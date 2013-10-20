@@ -53,16 +53,26 @@ function AddNewScoreJS(newScore)
   if(supports_html5_storage())
   {
     var ScoresString = localStorage["HexedHighscores"];
-    
-    var Data = JSON.parse(ScoresString);
-    var Scores = Data.HighScores;
-  
-    //Add new element to JSON
-    Scores.push(newScore);
-    //Sort result
-    Scores = sortByScoreAndDate(Scores);
-    //Store result
-    localStorage["HexedHighscores"] = JSON.stringify(Scores);
+    //If Data Exists, add the new value, otherwise handle creating it
+    if(ScoresString)
+    {
+      var Data = JSON.parse(ScoresString);
+      var Scores = Data.HighScores;
+      Scores.push(newScore);
+      //Sort result
+      Scores = sortByScoreAndDate(Scores);
+      
+      Data.HighScores = Scores;
+      //Store result
+      localStorage["HexedHighscores"] = JSON.stringify(Data);
+    }
+    else
+    {
+      var Scores = new Array();
+      Scores[0] = newScore;
+      var Data = { "HighScores": Scores };
+      localStorage["HexedHighscores"] = JSON.stringify(Data);
+    }
   }
   else
   {
@@ -87,9 +97,6 @@ function AddNewScore(name, difficulty, turns, score, time)
   };
   AddNewScoreJS(NewScore);
 }
-
-AddNewScore("derp", "medium", 20, 5000, "2000-10-15");
-console.log(localStorage["HexedHighscores"]);
 
   
   
