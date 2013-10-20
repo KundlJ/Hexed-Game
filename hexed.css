@@ -2,9 +2,10 @@
 	width: 300px;
 	margin-bottom: 15px;
 	margin-top: 15px;
+	float: left;
 }
 
-#circle {
+#swatch {
 	width: 300px;
 	height: 300px;
 }
@@ -14,5 +15,15 @@
 }
 
 .input {
+	float: left;
+	padding-top: 10.5px;
+	padding-left: 3px;
+}
+
+.pair {
+	clear: both;
+}
+
+#timer {
 	clear: both;
 }
