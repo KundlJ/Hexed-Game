@@ -19,7 +19,7 @@
 
 		<div id="swatch"></div>
 
-		<form>
+		<form> 
 			<div class="pair">
 				<div class="slider" id="redslider"></div> <div class="input"> <input type="text" id="red"><br></div>
 				<div class="badval" id="rbadval">Invalid Input: Requires numeric value in range 0 - 255</div>
@@ -41,6 +41,8 @@
 
         	<div id="timer"></div>
 
+		<div id="guessedSwatch"></div>
+
 	</div>
 	
 	<script src="hexed.js"></script>
@@ -50,10 +52,10 @@
 		$( ".slider" ).slider();
 	});
 	</script>
-	
-	<button onclick="obj.Stop()">Got it!</button>
-	<button onclick="">Next!</button> <!-- another turn started (restart to random color, new timer, new sliders) -->
 
 	<script type="text/javascript" src="slider-input.js"></script>
 	<script type="text/javascript" src="hexed.js"></script>
+
+	<button id="gotItButton">Got it!</button>
+	<button id="nextButton">Next!</button>
 </body>

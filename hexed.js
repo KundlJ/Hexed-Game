@@ -69,7 +69,7 @@ function randomColor()
 //CLASS
 var Timer = function() {
 	//EVENTS
-	this.Interval = 1000; //1 second intervals
+	this.Interval = 1000; //1 second interval default
 	this.Enable = new Boolean(false); //to start/stop itmer
 	this.Tick; //to enact what to do when the timer is going
 	//PRIVATE VARIABLES
@@ -80,7 +80,7 @@ var Timer = function() {
 	// start timer
 	this.Start = function() {
 		this.Enable = new Boolean(true);
-		thisObject = this;
+		thisObject = this; 
 		if (thisObject.Enable) {
 			thisObject.timerId = setInterval(function(){thisObject.Tick();},thisObject.Interval);
 		}            //setInterval gives what to do at each interval of alotted time
@@ -91,6 +91,10 @@ var Timer = function() {
 		thisObject.Enable = new Boolean(false);
 		clearInterval(thisObject.timerId);
 	};
+
+	//clear timer
+	this.Clear = function() {
+	}
 };
 
 //timer object and code
@@ -107,12 +111,14 @@ function timer_tick() {
 		document.getElementById("timer").innerHTML = "Time: " + time + " sec.";
 	}
 	time = time + 1; //to further the timer
-	
 };
 
-//problem: make 0 show up before 1 comes up??? --> solved
+//---------------------------------------------------------------------------------------------
 
+//testing turns
+var turns = 2;
 
+<<<<<<< HEAD
 //---------------------------------------------------------------------------------------------
 
 
@@ -120,3 +126,32 @@ var difficulty = document.getElementById("diff");
 difficulty.value = 5 // default
 var turns = document.getElementById("turn");
 turns.value = 10; // default
+=======
+//clicking next button
+$('#nextButton').click(function() {
+	if (turns > 0) {
+		randomColor(); //and link this random color to the correct slider values
+		--turns; //decrement turns
+		obj.Clear(); //restart timer
+		//restart sliders to zero/default position
+	}
+	else { //turns == 0
+		//final score presented
+		//user prompted to play again
+	}
+
+});
+
+
+
+//clicking got it button
+$('#gotItButton').click(function() {
+	obj.Stop(); //stop the timer
+	//display color of guessed rgb val
+	var r = document.getElementById('#red').value;
+	var g = document.getElementById('#green').value;
+	var b = document.getElementById('#blue').value;
+	var rgbval = rgbToHex(r,g,b);
+	$('#guessedSwatch').css('background',rgbval);
+});
+>>>>>>> Onclick for Got it and Next
