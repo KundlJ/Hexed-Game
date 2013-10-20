@@ -81,3 +81,9 @@ function timer_tick() {
 
 
 //---------------------------------------------------------------------------------------------
+
+
+var difficulty = document.getElementById("diff");
+difficulty.value = 5 // default
+var turns = document.getElementById("turn");
+turns.value = 10; // default
