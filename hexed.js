@@ -20,6 +20,36 @@ $.fn.hexed = function(options) {
 	});
 };
 
+var difficulty = document.getElementById("diff");
+difficulty.value = 5 // default
+var turns = document.getElementById("turn");
+turns.value = 10; // default
+
+//clicking got it button
+function gotItClick() {
+	obj.Stop(); //stop the timer
+	//display color of guessed rgb val
+	var r = document.getElementById('#red').value;
+	var g = document.getElementById('#green').value;
+	var b = document.getElementById('#blue').value;
+	var rgbval = rgbToHex(r,g,b);
+	$('#guessedSwatch').css("background","red"); //not working when test any color? not sure why?
+}
+
+//clicking next button
+function nextClick() {
+	if (turns.value > 0) {
+		obj.Restart(); //restart timer
+		//new random color displayed
+		--turns.value; //decrement turns
+		//restart sliders to zero/default position
+	}
+	else {  //if turns == 0
+		document.getElementById("score").innerHTML = "Final score: "// + finalscore;
+		document.getElementById("playAgain").innerHTML = "Play again?";
+	}
+}
+
 var red = document.getElementById("red");
 var green = document.getElementById("green");
 var blue = document.getElementById("blue");
@@ -74,52 +104,44 @@ var Timer = function() {
 	//EVENTS
 	this.Interval = 1000; //1 second intervals
 	this.Enable = new Boolean(false); //to start/stop itmer
-	this.Tick; //to enact what to do when the timer is going
+	this.Tick; //to further timer
 	//PRIVATE VARIABLES
 	var timerId = 0; // to use for setInterval
-	var thisObject; //to refer to self
+	var thisObject = this; //to refer to self
 	
 	//PUBLIC FUNCTIONS
-	// start timer
 	this.Start = function() {
-		this.Enable = new Boolean(true);
-		thisObject = this;
+		thisObject.Enable = new Boolean(true);
 		if (thisObject.Enable) {
 			thisObject.timerId = setInterval(function(){thisObject.Tick();},thisObject.Interval);
 		}            //setInterval gives what to do at each interval of alotted time
 	};
 
-	// stop timer 
 	this.Stop = function() {
 		thisObject.Enable = new Boolean(false);
 		clearInterval(thisObject.timerId);
 	};
+
+	this.Restart = function() {
+		thisObject.Enable = new Boolean(true);
+		if (thisObject.Enable) {
+			thisObject.timerId = setInterval(function(){thisObject.Tick();},thisObject.Interval);
+			time = 0;
+		}
+	}
+
+	this.Tick = function() {
+	    if (time < 10) {
+			document.getElementById("timer").innerHTML = "Time: " + "0" + time + " sec.";
+		}
+		else {
+			document.getElementById("timer").innerHTML = "Time: " + time + " sec.";
+		}
+		time = time + 1; //to further the timer
+	}
 };
 
-//timer object and code
+//timer object
 var time = 0;
 var obj = new Timer();
-obj.Interval = 1000;
-obj.Tick = timer_tick;
-function timer_tick() {
-	
-	if (time < 10) {
-		document.getElementById("timer").innerHTML = "Time: " + "0" + time + " sec.";
-	}
-	else {
-		document.getElementById("timer").innerHTML = "Time: " + time + " sec.";
-	}
-	time = time + 1; //to further the timer
-	
-};
-
-//problem: make 0 show up before 1 comes up??? --> solved
-
-
 //---------------------------------------------------------------------------------------------
-
-
-var difficulty = document.getElementById("diff");
-difficulty.value = 5 // default
-var turns = document.getElementById("turn");
-turns.value = 10; // default

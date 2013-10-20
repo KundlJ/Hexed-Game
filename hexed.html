@@ -5,7 +5,6 @@
 	<title>Hexed!</title>
 
 	<link rel="stylesheet" type="text/css" href="hexed.css">
-
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -40,12 +39,12 @@
         	</div>	
 
         	<div id="timer"></div>
+        	<div id="score"></div>
+        	<div id="playAgain"></div>
 
 		<div id="guessedSwatch"></div>
 
 	</div>
-	
-	<script src="hexed.js"></script>
 
 	<script>
 	$(function() {
@@ -56,6 +55,6 @@
 	<script type="text/javascript" src="slider-input.js"></script>
 	<script type="text/javascript" src="hexed.js"></script>
 
-	<button id="gotItButton">Got it!</button>
-	<button id="nextButton">Next!</button>
+	<button onclick="gotItClick()">Got it!</button>
+	<button onclick="nextClick()">Next!</button>
 </body>

@@ -10,6 +10,11 @@
 	height: 300px;
 }
 
+#guessedSwatch {
+	/*width: 200px;
+	height: 200px;*/
+}
+
 #all {
 	padding-left: 20px;
 }
