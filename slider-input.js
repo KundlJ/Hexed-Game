@@ -3,6 +3,10 @@ var red = document.getElementById("red");
 var green = document.getElementById("green");
 var blue = document.getElementById("blue");
 
+red.value = 0;
+green.value = 0;
+blue.value = 0;
+
 // Variables for warning messages
 var foo = document.getElementById("rbadval");
 foo.style.visibility = 'hidden';
@@ -23,7 +27,6 @@ red.onchange = function(e) {
 	}
 
 	else {
-		num = num * 100/255;
 		$("#redslider").slider("value", num);
 		var foo = document.getElementById("rbadval");
 		foo.style.visibility = 'hidden';
@@ -39,7 +42,6 @@ green.onchange = function(e) {
 	}
 
 	else {
-		num = num * 100/255;
 		$("#greenslider").slider("value", num);
 		var foo = document.getElementById("gbadval");
 		foo.style.visibility = 'hidden';
@@ -55,7 +57,6 @@ blue.onchange = function(e) {
 	}
 
 	else {
-		num = num * 100/255;
 		$("#blueslider").slider("value", num);
 		var foo = document.getElementById("bbadval");
 		foo.style.visibility = 'hidden';
@@ -65,17 +66,17 @@ blue.onchange = function(e) {
 // Functions for if the value is changed using the slider
 
 $( "#redslider" ).on( "slidechange", function( event, ui ) {
-	num = Math.floor(ui.value * 255 / 100);
+	num = ui.value;
 	red.value = num;
 } );
 
 $( "#greenslider" ).on( "slidechange", function( event, ui ) {
-	num = Math.floor(ui.value * 255 / 100);
+	num = ui.value;
 	green.value = num;
 } );
 
 $( "#blueslider" ).on( "slidechange", function( event, ui ) {
-	num = Math.floor(ui.value * 255 / 100);
+	num = ui.value;
 	blue.value = num;
 } );
 
