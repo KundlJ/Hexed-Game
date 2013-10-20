@@ -14,6 +14,11 @@
 	padding-left: 20px;
 }
 
+#settings {
+	float: left;
+	clear: both;
+}
+
 .input {
 	float: left;
 	padding-top: 10.5px;
@@ -27,9 +32,12 @@
 #timer {
 	clear: both;
 }
+<<<<<<< .merge_file_hMturR
 
 .badval {
 	float: left;
 	padding-top: 12px;
 	padding-left: 8px;
 }
+=======
+>>>>>>> .merge_file_SYM2ak
