@@ -68,10 +68,10 @@ obj.Tick = timer_tick;
 function timer_tick() {
 	
 	if (time < 10) {
-		document.getElementById("timer").innerHTML = "0" + time;
+		document.getElementById("timer").innerHTML = "Time: " + "0" + time + " sec.";
 	}
 	else {
-		document.getElementById("timer").innerHTML = time;
+		document.getElementById("timer").innerHTML = "Time: " + time + " sec.";
 	}
 	time = time + 1; //to further the timer
 	
