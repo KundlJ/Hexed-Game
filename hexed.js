@@ -16,6 +16,7 @@ $.fn.hexed = function(options) {
 	}
 
 	return this.each(function () {
+		//We return the HTML we want to write here
 		$(this).html('<p> Difficulty:' + settings.difficulty + " NumTurns:" + settings.numTurns) + '</p>';
 	});
 };
