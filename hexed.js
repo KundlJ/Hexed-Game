@@ -1,6 +1,24 @@
-$(document).ready(function() {
+$(document).ready(function() {	
 	randomColor();
+	//$('#NameOfDiv').hexed();
 });
+
+$.fn.hexed = function(options) {
+	var settings = {
+		difficulty: 5,
+		numTurns: 10
+	};		
+
+	//If user passes in options parameter, rewrite the settings variable
+	if(options) {
+		$.extend(settings, options);
+	}
+
+	return this.each(function () {
+		//This is where we put the HTML that's going to be inserted
+		//$(this).html('<p> Difficulty:' + settings.difficulty + " NumTurns:" + settings.numTurns) + '</p>';
+	});
+};
 
 var red = document.getElementById("red");
 var green = document.getElementById("green");
@@ -10,34 +28,42 @@ function isValid(num) {
 	return ((isNaN(num)) || (num < 0 || num > 255));
 }
 
-//Created by Altan
+function rgbToHex(r, g, b)
+{
+	var rString = r.toString(16);
+	var gString = g.toString(16);
+	var bString = b.toString(16);
+
+	if(rString.length == 1) 
+	{
+		rString = "0" + rString;
+	}
+	if(gString.length == 1)
+	{
+		gString = "0" + gString;		
+	}
+	if(bString.length == 1)
+	{
+		bString = "0" + bString;
+	}
+	
+	rString = rString.toUpperCase();
+	gString = gString.toUpperCase();
+	bString = bString.toUpperCase(); 
+
+	return "#" + rString + gString + bString; 
+}
+
 function randomColor()
 {
 	var r = Math.floor((Math.random()*255));
 	var g = Math.floor((Math.random()*255));
 	var b = Math.floor((Math.random()*255));
-	var rString = r.toString(16);
-	var gString = g.toString(16);
-	var bString = b.toString(16); 
-	
-	if(r < 16)
-	{
-		rString = "0" + rString;
-	}
-	if(g < 16)
-	{
-		gString = "0" + gString;
-	}
-	if(b < 16)
-	{
-		bString = "0" + bString; 
-	}
 
-	var rgbHex = "#" + rString + gString + bString; 
+	var hexColor = rgbToHex(r,g,b);
 	
 	//Swatch is the ID of the DIV holding the color
-	$('#swatch').css("background", rgbHex);
-	//$('#swatch').html(rString + "\n" + gString + "\n" + bString);
+	$('#swatch').css("background", hexColor);	
 }
 
 
