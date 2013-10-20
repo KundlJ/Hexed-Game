@@ -66,16 +66,18 @@ var obj = new Timer();
 obj.Interval = 1000;
 obj.Tick = timer_tick;
 function timer_tick() {
-	time = time + 1; //to further the timer
+	
 	if (time < 10) {
 		document.getElementById("timer").innerHTML = "0" + time;
 	}
 	else {
 		document.getElementById("timer").innerHTML = time;
 	}
+	time = time + 1; //to further the timer
+	
 };
 
-//problem: make 0 show up before 1 comes up???
+//problem: make 0 show up before 1 comes up??? --> solved
 
 
 //---------------------------------------------------------------------------------------------
