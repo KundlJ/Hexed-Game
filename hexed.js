@@ -1,51 +1,13 @@
-$(document).ready(function() {	
+$(document).ready(function() {
 	randomColor();
-	//Call hexed function here
-	//$('#NameOfDiv').hexed();
 });
 
-$.fn.hexed = function(options) {
-	var settings = {
-		difficulty: 5,
-		numTurns: 10
-	};		
+var red = document.getElementById("red");
+var green = document.getElementById("green");
+var blue = document.getElementById("blue");
 
-	//If user passes in options parameter, rewrite the settings variable
-	if(options) {
-		$.extend(settings, options);
-	}
-
-	return this.each(function () {
-		//We return the HTML we want to write here
-		$(this).html('<p> Difficulty:' + settings.difficulty + " NumTurns:" + settings.numTurns) + '</p>';
-	});
-};
-
-
-function rgbToHex(r, g, b)
-{
-	var rString = r.toString(16);
-	var gString = g.toString(16);
-	var bString = b.toString(16);
-
-	if(rString.length == 1) 
-	{
-		rString = "0" + rString;
-	}
-	if(gString.length == 1)
-	{
-		gString = "0" + gString;		
-	}
-	if(bString.length == 1)
-	{
-		bString = "0" + bString;
-	}
-	
-	rString = rString.toUpperCase();
-	gString = gString.toUpperCase();
-	bString = bString.toUpperCase(); 
-
-	return "#" + rString + gString + bString; 
+function isValid(num) {
+	return ((isNaN(num)) || (num < 0 || num > 255));
 }
 
 //Created by Altan
@@ -54,13 +16,28 @@ function randomColor()
 	var r = Math.floor((Math.random()*255));
 	var g = Math.floor((Math.random()*255));
 	var b = Math.floor((Math.random()*255));
+	var rString = r.toString(16);
+	var gString = g.toString(16);
+	var bString = b.toString(16); 
+	
+	if(r < 16)
+	{
+		rString = "0" + rString;
+	}
+	if(g < 16)
+	{
+		gString = "0" + gString;
+	}
+	if(b < 16)
+	{
+		bString = "0" + bString; 
+	}
 
-	var hexColor = rgbToHex(r,g,b);
+	var rgbHex = "#" + rString + gString + bString; 
 	
 	//Swatch is the ID of the DIV holding the color
-	$('#swatch').css("height", 200);
-	$('#swatch').css("width", 200);
-	$('#swatch').css("background", hexColor);	
+	$('#swatch').css("background", rgbHex);
+	//$('#swatch').html(rString + "\n" + gString + "\n" + bString);
 }
 
 
@@ -69,7 +46,7 @@ function randomColor()
 //CLASS
 var Timer = function() {
 	//EVENTS
-	this.Interval = 1000; //1 second interval default
+	this.Interval = 1000; //1 second intervals
 	this.Enable = new Boolean(false); //to start/stop itmer
 	this.Tick; //to enact what to do when the timer is going
 	//PRIVATE VARIABLES
@@ -80,7 +57,7 @@ var Timer = function() {
 	// start timer
 	this.Start = function() {
 		this.Enable = new Boolean(true);
-		thisObject = this; 
+		thisObject = this;
 		if (thisObject.Enable) {
 			thisObject.timerId = setInterval(function(){thisObject.Tick();},thisObject.Interval);
 		}            //setInterval gives what to do at each interval of alotted time
@@ -91,10 +68,6 @@ var Timer = function() {
 		thisObject.Enable = new Boolean(false);
 		clearInterval(thisObject.timerId);
 	};
-
-	//clear timer
-	this.Clear = function() {
-	}
 };
 
 //timer object and code
@@ -111,14 +84,12 @@ function timer_tick() {
 		document.getElementById("timer").innerHTML = "Time: " + time + " sec.";
 	}
 	time = time + 1; //to further the timer
+	
 };
 
-//---------------------------------------------------------------------------------------------
+//problem: make 0 show up before 1 comes up??? --> solved
 
-//testing turns
-var turns = 2;
 
-<<<<<<< HEAD
 //---------------------------------------------------------------------------------------------
 
 
@@ -126,32 +97,3 @@ var difficulty = document.getElementById("diff");
 difficulty.value = 5 // default
 var turns = document.getElementById("turn");
 turns.value = 10; // default
-=======
-//clicking next button
-$('#nextButton').click(function() {
-	if (turns > 0) {
-		randomColor(); //and link this random color to the correct slider values
-		--turns; //decrement turns
-		obj.Clear(); //restart timer
-		//restart sliders to zero/default position
-	}
-	else { //turns == 0
-		//final score presented
-		//user prompted to play again
-	}
-
-});
-
-
-
-//clicking got it button
-$('#gotItButton').click(function() {
-	obj.Stop(); //stop the timer
-	//display color of guessed rgb val
-	var r = document.getElementById('#red').value;
-	var g = document.getElementById('#green').value;
-	var b = document.getElementById('#blue').value;
-	var rgbval = rgbToHex(r,g,b);
-	$('#guessedSwatch').css('background',rgbval);
-});
->>>>>>> Onclick for Got it and Next
