@@ -21,13 +21,16 @@
 
 		<form>
 			<div class="pair">
-				<div class="slider"></div> <div class="input"> <input type="text" name="red"><br></div>
+				<div class="slider" id="redslider"></div> <div class="input"> <input type="text" id="red"><br></div>
+				<div class="badval" id="rbadval">Invalid Input: Requires numeric value in range 0 - 255</div>
 			</div>
 			<div class="pair">
-				<div class="slider"></div> <div class="input"> <input type="text" name="green"><br></div>
+				<div class="slider" id="greenslider"></div> <div class="input"> <input type="text" id="green"><br> </div>
+				<div class="badval" id="gbadval">Invalid Input: Requires numeric value in range 0 - 255</div>
 			</div>
 			<div class="pair">
-				<div class="slider"></div> <div class="input"> <input type="text" name="blue"><br></div>
+				<div class="slider" id="blueslider"></div> <div class="input"> <input type="text" id="blue"><br> </div>
+				<div class="badval" id="bbadval">Invalid Input: Requires numeric value in range 0 - 255</div>
 			</div>
 		</form>
 		
@@ -45,4 +48,6 @@
 	
 	<button onclick="obj.Stop()">Got it!</button>
 	<button onclick="">Next!</button> <!-- another turn started (restart to random color, new timer, new sliders) -->
+
+	<script type="text/javascript" src="slider-input.js"></script>
 </body>

@@ -17,7 +17,7 @@
 .input {
 	float: left;
 	padding-top: 10.5px;
-	padding-left: 3px;
+	padding-left: 18px;
 }
 
 .pair {
@@ -26,4 +26,10 @@
 
 #timer {
 	clear: both;
+}
+
+.badval {
+	float: left;
+	padding-top: 12px;
+	padding-left: 8px;
 }
