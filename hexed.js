@@ -1,3 +1,7 @@
+$(document).ready(function() {
+	randomColor();
+});
+
 //Created by Altan
 function randomColor()
 {
@@ -24,8 +28,6 @@ function randomColor()
 	var rgbHex = "#" + rString + gString + bString; 
 	
 	//Swatch is the ID of the DIV holding the color
-	$('#swatch').css("height", 200);
-	$('#swatch').css("width", 200);
 	$('#swatch').css("background", rgbHex);
 	//$('#swatch').html(rString + "\n" + gString + "\n" + bString);
 }
