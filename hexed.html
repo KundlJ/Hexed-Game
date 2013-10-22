@@ -12,27 +12,44 @@
 
 </head>
 <body onload="obj.Start()">
-	
-
 	<div id="all">
-
+		<div id="settings"></div>
 		<div id="swatch"></div>
 
 		<form> 
 			<div class="pair">
-				<div class="slider" id="redslider"></div> <div class="input"> <input type="text" id="red"><br></div>
-				<div class="badval" id="rbadval">Invalid Input: Requires numeric value in range 0 - 255</div>
+				<div class="slider" id="redSlider"></div> 
+				<div class="input"> 
+					<input type="text" id="red">
+					<br/>
+				</div>
+				<div class="badval" id="rbadval">
+					<p>Invalid Input: Requires numeric value in range 0 - 25</p>
+				</div>
 			</div>
 			<div class="pair">
-				<div class="slider" id="greenslider"></div> <div class="input"> <input type="text" id="green"><br> </div>
-				<div class="badval" id="gbadval">Invalid Input: Requires numeric value in range 0 - 255</div>
+				<div class="slider" id="greenSlider"></div> 
+				<div class="input"> 
+					<input type="text" id="green">
+					<br/> 
+				</div>
+				<div class="badval" id="gbadval">
+					<p>Invalid Input: Requires numeric value in range 0 - 255</p>
+				</div>
 			</div>
 			<div class="pair">
-				<div class="slider" id="blueslider"></div> <div class="input"> <input type="text" id="blue"><br> </div>
-				<div class="badval" id="bbadval">Invalid Input: Requires numeric value in range 0 - 255</div>
+				<div class="slider" id="blueSlider"></div> 
+				<div class="input"> 
+					<input type="text" id="blue">
+					<br/> 
+				</div>
+				<div class="badval" id="bbadval">
+					<p>Invalid Input: Requires numeric value in range 0 - 255</p>
+				</div>
 			</div>
 		</form>
 		
+<<<<<<< HEAD
 		<div id="settings">
 			<div id="difficulty">Difficulty(0-10): <input type="text" id="diff"></div>
         		<div id="turns">Turns: <input type="text" id="turn"></div>
@@ -45,6 +62,16 @@
 		<div id="guessedSwatch"></div>
 
 	</div>
+=======
+		<div id="timer"></div>
+		<button id="gotItButton" onclick="gotItClick()">Got it!</button>
+		<button id="nextButton" onclick="nextClick()">Next!</button>
+		<div id="guessedSwatches"></div>		
+	</div>
+	
+	<script src="hexed.js"></script>
+	<script src="timer.js"></script>
+>>>>>>> Added timer.js plus other functionality
 
 	<script>
 	$(function() {
@@ -53,8 +80,12 @@
 	</script>
 
 	<script type="text/javascript" src="slider-input.js"></script>
+<<<<<<< HEAD
 	<script type="text/javascript" src="hexed.js"></script>
 
 	<button onclick="gotItClick()">Got it!</button>
 	<button onclick="nextClick()">Next!</button>
+=======
+	<script type="text/javascript" src="hexed.js"></script>	
+>>>>>>> Added timer.js plus other functionality
 </body>

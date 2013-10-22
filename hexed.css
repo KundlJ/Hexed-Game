@@ -10,9 +10,25 @@
 	height: 300px;
 }
 
+<<<<<<< HEAD
 #guessedSwatch {
 	/*width: 200px;
 	height: 200px;*/
+=======
+.userSwatch {
+	display: block;
+	clear: right;
+}
+
+.userColor {
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+}
+
+.badval {
+	visibility: hidden;
+>>>>>>> Added timer.js plus other functionality
 }
 
 #all {
@@ -20,8 +36,7 @@
 }
 
 #settings {
-	float: left;
-	clear: both;
+	display: block;	
 }
 
 .input {
