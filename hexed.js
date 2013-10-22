@@ -2,6 +2,7 @@
 var time = 0;
 var obj = new Timer();
 
+var settings;
 var difficulty;
 var numTurns; 
 var swatchR;
@@ -27,7 +28,7 @@ $(document).ready(function() {
 });
 
 $.fn.hexed = function(options) {
-	var settings = {
+	settings = {
 		difficulty: 5,
 		numTurns: 3
 	};		
@@ -132,9 +133,8 @@ function gotItClick()
     	document.getElementById('nextButton').disabled = true;
     	obj.Stop();
 
-    	$('swatch').css('display', 'none');
-    	div = document.getElementById('endOfGame');
-    	div.style.visibility = 'visible';
+    	$('#swatch').css('display', 'none');
+    	$('#endOfGame').css('display', 'block');
     }
     else
     {
@@ -171,3 +171,17 @@ function resetInputs()
 	$('#blue').val(128);
 }
 
+function newScore()
+{
+	var date = new Date(); 
+	var year = date.getUTCFullYear();
+	var month = date.getUTCMonth() + 1; //0-index based
+	var day = date.getUTCDate();		
+
+	AddNewScore($('#nameText').val(),
+		difficulty,
+		settings.numTurns,
+		finalScore,
+		year + '-' + month + '-' + day
+	);
+}

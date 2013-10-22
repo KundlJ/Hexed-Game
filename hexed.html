@@ -16,8 +16,14 @@
 		<div id="settings"></div>
 		<div id="swatch"></div>
 		<div id="endOfGame">
-			<button id="viewScores">View High Scores</button>
-			<button id="addScore">Add my score</button>
+			<a href="Team6Scores.html"><button id="viewScores">View High Scores</button></a>
+			<br/>			
+			<div id="scoreName">
+				<p id="name">Name:</p>
+				<input type="text" id="nameText"/>
+				<button id="addScore" onclick="newScore()">Add my score</button>
+			</div>			
+			
 		</div>
 
 		<form> 
@@ -59,8 +65,7 @@
 		<div id="guessedSwatches"></div>		
 	</div>
 	
-	<script src="timer.js"></script>
-	<script src="hexed.js"></script>
+	
 	
 
 	<script>
@@ -69,6 +74,9 @@
 	});
 	</script>
 
+	<script type="text/javascript" src="timer.js"></script>	
+	<script type="text/javascript" src="NewScore.js"></script>
+	<script type="text/javascript" src="GetHighscores.js"></script>
 	<script type="text/javascript" src="slider-input.js"></script>
-	<script type="text/javascript" src="hexed.js"></script>	
+	<script type="text/javascript" src="hexed.js"></script>
 </body>

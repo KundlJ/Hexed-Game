@@ -36,8 +36,18 @@
 	display: block;	
 }
 
+#scoreText {
+	display: inline;
+}
+
+#name {
+	display: inline;
+}
+
 #endOfGame {
-	visibility: hidden;
+	display: none;
+	width:300px;
+	height:300px;
 }
 
 .input {
