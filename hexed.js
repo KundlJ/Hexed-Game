@@ -11,8 +11,6 @@ var finalScore;
 
 $(document).ready(function() {	
 	randomColor();
-<<<<<<< HEAD
-=======
 
 	$('.slider').slider({max: 255});
 	$('.slider').slider({min: 0});
@@ -25,14 +23,13 @@ $(document).ready(function() {
 	resetInputs();
 
 	$('#all').hexed();
->>>>>>> Added timer.js plus other functionality
 	//$('#NameOfDiv').hexed();
 });
 
 $.fn.hexed = function(options) {
 	var settings = {
 		difficulty: 5,
-		numTurns: 10
+		numTurns: 3
 	};		
 
 	//If user passes in options parameter, rewrite the settings variable
@@ -52,39 +49,6 @@ $.fn.hexed = function(options) {
 	});
 };
 
-<<<<<<< HEAD
-var difficulty = document.getElementById("diff");
-difficulty.value = 5 // default
-var turns = document.getElementById("turn");
-turns.value = 10; // default
-
-//clicking got it button
-function gotItClick() {
-	obj.Stop(); //stop the timer
-	//display color of guessed rgb val
-	var r = document.getElementById('#red').value;
-	var g = document.getElementById('#green').value;
-	var b = document.getElementById('#blue').value;
-	var rgbval = rgbToHex(r,g,b);
-	$('#guessedSwatch').css("background","red"); //not working when test any color? not sure why?
-}
-
-//clicking next button
-function nextClick() {
-	if (turns.value > 0) {
-		obj.Restart(); //restart timer
-		//new random color displayed
-		--turns.value; //decrement turns
-		//restart sliders to zero/default position
-	}
-	else {  //if turns == 0
-		document.getElementById("score").innerHTML = "Final score: "// + finalscore;
-		document.getElementById("playAgain").innerHTML = "Play again?";
-	}
-}
-
-=======
->>>>>>> Added timer.js plus other functionality
 var red = document.getElementById("red");
 var green = document.getElementById("green");
 var blue = document.getElementById("blue");
@@ -124,12 +88,9 @@ function randomColor()
 	var hexColor = rgbToHex(swatchR,swatchG,swatchB);
 	//swatchColor = hexColor; 
 	//Swatch is the ID of the DIV holding the color
-<<<<<<< HEAD
-	$('#swatch').css("background", hexColor);	
-=======
+
 	$('#swatch').css("background-color", '#' + hexColor);	
 	//return swatchColor; 
->>>>>>> Added timer.js plus other functionality
 }
 
 function gotItClick()
@@ -150,6 +111,7 @@ function gotItClick()
     	score = 0; 
     }
 
+    Math.round(score);
     finalScore += score; 
     numTurns--;
 
@@ -170,6 +132,9 @@ function gotItClick()
     	document.getElementById('nextButton').disabled = true;
     	obj.Stop();
 
+    	$('swatch').css('display', 'none');
+    	div = document.getElementById('endOfGame');
+    	div.style.visibility = 'visible';
     }
     else
     {
@@ -183,56 +148,6 @@ function gotItClick()
     }	
 }
 
-<<<<<<< HEAD
-//timer class, object, and code------------------------------------------------
-
-//CLASS
-var Timer = function() {
-	//EVENTS
-	this.Interval = 1000; //1 second intervals
-	this.Enable = new Boolean(false); //to start/stop itmer
-	this.Tick; //to further timer
-	//PRIVATE VARIABLES
-	var timerId = 0; // to use for setInterval
-	var thisObject = this; //to refer to self
-	
-	//PUBLIC FUNCTIONS
-	this.Start = function() {
-		thisObject.Enable = new Boolean(true);
-		if (thisObject.Enable) {
-			thisObject.timerId = setInterval(function(){thisObject.Tick();},thisObject.Interval);
-		}            //setInterval gives what to do at each interval of alotted time
-	};
-
-	this.Stop = function() {
-		thisObject.Enable = new Boolean(false);
-		clearInterval(thisObject.timerId);
-	};
-
-	this.Restart = function() {
-		thisObject.Enable = new Boolean(true);
-		if (thisObject.Enable) {
-			thisObject.timerId = setInterval(function(){thisObject.Tick();},thisObject.Interval);
-			time = 0;
-		}
-	}
-
-	this.Tick = function() {
-	    if (time < 10) {
-			document.getElementById("timer").innerHTML = "Time: " + "0" + time + " sec.";
-		}
-		else {
-			document.getElementById("timer").innerHTML = "Time: " + time + " sec.";
-		}
-		time = time + 1; //to further the timer
-	}
-};
-
-//timer object
-var time = 0;
-var obj = new Timer();
-//---------------------------------------------------------------------------------------------
-=======
 function nextClick()
 {
 	randomColor();
@@ -246,7 +161,6 @@ function nextClick()
 	}
 }
 
-
 function resetInputs()
 {
 	$('#redSlider').slider("value", 128);
@@ -256,4 +170,4 @@ function resetInputs()
 	$('#green').val(128);
 	$('#blue').val(128);
 }
->>>>>>> Added timer.js plus other functionality
+

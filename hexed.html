@@ -15,6 +15,10 @@
 	<div id="all">
 		<div id="settings"></div>
 		<div id="swatch"></div>
+		<div id="endOfGame">
+			<button id="viewScores">View High Scores</button>
+			<button id="addScore">Add my score</button>
+		</div>
 
 		<form> 
 			<div class="pair">
@@ -24,7 +28,7 @@
 					<br/>
 				</div>
 				<div class="badval" id="rbadval">
-					<p>Invalid Input: Requires numeric value in range 0 - 25</p>
+					<p>Invalid Input: Requires numeric value in range 0 - 255</p>
 				</div>
 			</div>
 			<div class="pair">
@@ -48,30 +52,16 @@
 				</div>
 			</div>
 		</form>
-		
-<<<<<<< HEAD
-		<div id="settings">
-			<div id="difficulty">Difficulty(0-10): <input type="text" id="diff"></div>
-        		<div id="turns">Turns: <input type="text" id="turn"></div>
-        	</div>	
 
-        	<div id="timer"></div>
-        	<div id="score"></div>
-        	<div id="playAgain"></div>
-
-		<div id="guessedSwatch"></div>
-
-	</div>
-=======
 		<div id="timer"></div>
 		<button id="gotItButton" onclick="gotItClick()">Got it!</button>
 		<button id="nextButton" onclick="nextClick()">Next!</button>
 		<div id="guessedSwatches"></div>		
 	</div>
 	
-	<script src="hexed.js"></script>
 	<script src="timer.js"></script>
->>>>>>> Added timer.js plus other functionality
+	<script src="hexed.js"></script>
+	
 
 	<script>
 	$(function() {
@@ -80,12 +70,5 @@
 	</script>
 
 	<script type="text/javascript" src="slider-input.js"></script>
-<<<<<<< HEAD
-	<script type="text/javascript" src="hexed.js"></script>
-
-	<button onclick="gotItClick()">Got it!</button>
-	<button onclick="nextClick()">Next!</button>
-=======
 	<script type="text/javascript" src="hexed.js"></script>	
->>>>>>> Added timer.js plus other functionality
 </body>

@@ -10,11 +10,6 @@
 	height: 300px;
 }
 
-<<<<<<< HEAD
-#guessedSwatch {
-	/*width: 200px;
-	height: 200px;*/
-=======
 .userSwatch {
 	display: block;
 	clear: right;
@@ -28,7 +23,9 @@
 
 .badval {
 	visibility: hidden;
->>>>>>> Added timer.js plus other functionality
+	float: left;
+	padding-top: 14px;
+	padding-left: 8px;
 }
 
 #all {
@@ -37,6 +34,10 @@
 
 #settings {
 	display: block;	
+}
+
+#endOfGame {
+	visibility: hidden;
 }
 
 .input {
@@ -52,11 +53,3 @@
 #timer {
 	clear: both;
 }
-
-
-.badval {
-	float: left;
-	padding-top: 14px;
-	padding-left: 8px;
-}
-
