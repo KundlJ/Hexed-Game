@@ -30,7 +30,7 @@ $(document).ready(function() {
 $.fn.hexed = function(options) {
 	settings = {
 		difficulty: 5,
-		numTurns: 3
+		numTurns: 10
 	};		
 
 	//If user passes in options parameter, rewrite the settings variable
@@ -42,7 +42,7 @@ $.fn.hexed = function(options) {
 	numTurns = settings.numTurns; 
 	finalScore = 0; 
 
-	$('#settings').html('<p>Difficulty: ' + difficulty + '</p><p>Number of Turns:' + numTurns + '</p>');
+	$('#settings').html('<p>Difficulty: ' + difficulty + '</p><p>Number of Turns: ' + numTurns + '</p>');
 
 	return this.each(function () {
 		//This is where we put the HTML that's going to be inserted
@@ -107,28 +107,28 @@ function gotItClick()
     var percentB = Math.round(Math.abs(((swatchB - bInput)) / 255) * 100);
     var avgPercent = (percentR + percentG + percentB) / 3; 
     var score = ((15 - difficulty - avgPercent) / (15 - difficulty)) * (15000 - (time - 1) * 1000);
-    if(score < 0)
+    if (score < 0)
     {    	
-    	score = 0; 
+    	score = 0;
     }
 
     Math.round(score);
     finalScore += score; 
     numTurns--;
 
-    $('#settings').html('<p>Difficulty: ' + difficulty + '</p><p>Number of Turns:' + numTurns + '</p>'
+    $('#settings').html('<p>Difficulty: ' + difficulty + '</p><p>Number of Turns: ' + numTurns + '</p>'
     	+ '<p>Score: ' + finalScore);
 
     $('#guessedSwatches').append('<div class="userSwatch"></div>');
     $('.userSwatch:last').append('<div class="userColor"></div>');
-    $('.userSwatch:last').append('<p>R:' + percentR + '% G:' + percentG + '% B:' + percentB + '%' +
-     '--' + score + ' points</p>');
+    $('.userSwatch:last').append('<p>R:' + percentR + '% off G:' + percentG + '% off B:' + percentB + '% off' +
+     ' = ' + score + ' points</p>');
     $('.userColor:last').css('background-color', '#' + userColor);
 
     if(numTurns == 0)
     {
     	$('#swatch').css('background', 'white');
-    	$('#swatch').html('<p>End of Game!</p>');
+    	$('#settings').append('<div id="end">End of Game!</p>');
     	document.getElementById('gotItButton').disabled = true;
     	document.getElementById('nextButton').disabled = true;
     	obj.Stop();
@@ -138,27 +138,18 @@ function gotItClick()
     }
     else
     {
-    	//get new color on the swatch
-		randomColor();
-
-		//reset the sliders
-		resetInputs(); 
-
-		obj.Restart();
+    	obj.Stop();
     }	
 }
 
 function nextClick()
 {
 	randomColor();
-	numTurns--;
+	resetInputs();
+	obj.Stop();
+	obj.Restart();
 	$('#settings').html('<p>Difficulty: ' + difficulty + '</p><p>Number of Turns:' + numTurns + '</p>'
     	+ '<p>Score: ' + finalScore);
-	if(numTurns == 0)
-	{
-		document.getElementById('gotItButton').disabled = true;
-    	document.getElementById('nextButton').disabled = true;
-	}
 }
 
 function resetInputs()
