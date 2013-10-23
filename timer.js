@@ -42,11 +42,11 @@ var Timer = function()
     {
     	if(time < 10)
     	{
-    		 document.getElementById("timer").innerHTML = "Time: " + "0" + time + " sec.";
+    		 document.getElementById("timer").innerHTML = "Time: " + "0" + time + " sec";
     	}
     	else
     	{
-    		document.getElementById("timer").innerHTML = "Time: " + time + " sec.";	
+    		document.getElementById("timer").innerHTML = "Time: " + time + " sec";	
     	}
 
     	time = time + 1; 
