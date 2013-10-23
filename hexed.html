@@ -13,17 +13,19 @@
 </head>
 <body onload="obj.Start()">
 	<div id="all">
-		<div id="settings"></div>
+		<header>
+			<h1>Color Guessing Put To The Test</h1>
+			<div id="settings"></div>
+		</header>
 		<div id="swatch"></div>
-		<div id="endOfGame">
-			<a href="Team6Scores.html"><button id="viewScores">View High Scores</button></a>
-			<br/>			
+		<div id="endOfGame">			
 			<div id="scoreName">
 				<p id="name">Name:</p>
 				<input type="text" id="nameText"/>
-				<button id="addScore" onclick="newScore()">Add my score</button>
-			</div>			
-			
+				<button id="addScore" onclick="newScore()">Add my score</button>	
+			</div>
+			<br/>
+			<a href="Team6Scores.html"><button id="viewScores">View High Scores</button></a>
 		</div>
 
 		<form> 
@@ -64,17 +66,12 @@
 		<button id="nextButton" onclick="nextClick()">Next!</button>
 		<div id="guessedSwatches"></div>		
 	</div>
-	
-	
-	
 
-	<script>
+	<script type="text/javascript">
 	$(function() {
 		$( ".slider" ).slider({min: 0, max:255});
 	});
 	</script>
-
-	<script type="text/javascript" src="timer.js"></script>	
 	<script type="text/javascript" src="NewScore.js"></script>
 	<script type="text/javascript" src="GetHighscores.js"></script>
 	<script type="text/javascript" src="slider-input.js"></script>
