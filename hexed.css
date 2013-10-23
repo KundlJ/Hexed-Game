@@ -1,3 +1,7 @@
+body {
+	font-family: Tahoma, Geneva, sans-serif;
+}
+
 .slider {
 	width: 300px;
 	margin-bottom: 15px;
@@ -34,6 +38,12 @@
 
 #settings {
 	display: block;	
+	float: left;
+	margin-left: 330px;
+}
+
+#end {
+	font-size: 3em;
 }
 
 #scoreText {
@@ -46,8 +56,10 @@
 
 #endOfGame {
 	display: none;
-	width:300px;
-	height:300px;
+	float: left;
+	margin-left: -630px;
+	text-align: center;
+	margin-top: 75px;
 }
 
 .input {
@@ -63,3 +75,4 @@
 #timer {
 	clear: both;
 }
+
