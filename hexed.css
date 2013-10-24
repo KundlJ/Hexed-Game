@@ -1,12 +1,30 @@
 body {
-	font-family: Tahoma, Geneva, sans-serif;
+	font-family: Tahoma, Geneva, sans-serif; 
 }
 
-.slider {
-	width: 300px;
-	margin-bottom: 15px;
-	margin-top: 15px;
+#all {
+	padding-left: 20px;
+}
+
+#leftSide {
 	float: left;
+	display: block;
+	margin-right: 0px;
+}
+
+#rightSide {
+	float: left;
+	display: block;
+}
+
+#settings {
+	display: block;	
+
+}
+
+#timer {
+	display: block;
+	height: 19px;
 }
 
 #swatch {
@@ -14,6 +32,7 @@ body {
 	height: 300px;
 }
 
+/*userSwatch and userColor get inserted into the HTML by javascript*/
 .userSwatch {
 	display: block;
 	clear: right;
@@ -25,25 +44,34 @@ body {
 	display: inline-block;
 }
 
+.pair {
+	clear: both;
+}
+
+.slider {
+	width: 300px;
+	margin-bottom: 15px;
+	margin-top: 15px;
+	float: left;
+}
+
+.input {
+	float: left;
+	padding-top: 10.5px;
+	padding-left: 18px;
+}
+
 .badval {
 	visibility: hidden;
 	float: left;
-	padding-top: 14px;
-	padding-left: 8px;
+	font-weight: bold;
 }
 
-#all {
-	padding-left: 20px;
-}
-
-#settings {
-	display: block;	
-	float: left;
-	margin-left: 330px;
-}
-
-#end {
-	font-size: 3em;
+#endOfGame {
+	display: none;
+	float:left;
+	margin-bottom: auto;
+	text-align: center;
 }
 
 #scoreText {
@@ -54,25 +82,10 @@ body {
 	display: inline;
 }
 
-#endOfGame {
-	display: none;
-	float: left;
-	margin-left: -630px;
-	text-align: center;
-	margin-top: 75px;
+#endOfGameText {
+	font-weight: bold;
 }
 
-.input {
-	float: left;
-	padding-top: 10.5px;
-	padding-left: 18px;
+.endOfGameButtons {
+	margin: 5px;
 }
-
-.pair {
-	clear: both;
-}
-
-#timer {
-	clear: both;
-}
-

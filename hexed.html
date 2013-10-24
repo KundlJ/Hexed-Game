@@ -1,77 +1,82 @@
 <!DOCTYPE HTML>
-
 <head>
 	<meta charset="utf-8">
 	<title>Hexed!</title>
-
 	<link rel="stylesheet" type="text/css" href="hexed.css">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	<link rel="stylesheet" href="/resources/demos/style.css" />
-
 </head>
 <body onload="obj.Start()">
-	<div id="all">
-		<header>
-			<h1>Color Guessing Put To The Test</h1>
-			<div id="settings"></div>
-		</header>
-		<div id="swatch"></div>
-		<div id="endOfGame">			
-			<div id="scoreName">
-				<p id="name">Name:</p>
-				<input type="text" id="nameText"/>
-				<button id="addScore" onclick="newScore()">Add my score</button>	
+	<div id="all">		
+		<div id="leftSide">
+			<header>
+				<h1>Hexed!</h1>
+				<div id="timer"></div>				
+				<div id="settings"></div>
+			</header>
+			<div id="swatch">
+				<!--End of Game div is invisible while the game is being played-->
+				<div id="endOfGame">
+					<p id="endOfGameText">End of Game!</p>
+					<div id="scoreName">
+						<p id="finalScore">Final Score: </p>
+						<br/>
+						<button class="endOfGameButtons" id="playAgain" onclick="playAgainClick()">Play Again</button>
+						<br/>
+						<p id="name">Name:</p>
+						<input type="text" id="nameText"/>						
+						<button class="endOfGameButtons" id="addScore" onclick="newScore()">Add my score</button>						
+					</div>
+					<!--Have to use a form here instead of <a> tag because of HTML5 restrictions -->
+					<form action="Team6Scores.html" method="get">
+						<button class="endOfGameButtons" id="viewScores">View High Scores</button>
+					</form>
+				</div>
+				<br/>				
 			</div>
-			<br/>
-			<a href="Team6Scores.html"><button id="viewScores">View High Scores</button></a>
+
+			<form> 
+				<div class="pair">
+					<div class="slider" id="redSlider"></div> 
+					<div class="input"> 
+						<input type="text" id="red">
+						<br/>
+					</div>
+					<div class="badval" id="rbadval">
+						<p>Invalid Input: Requires numeric value in range 0 - 255</p>
+					</div>
+				</div>
+				<div class="pair">
+					<div class="slider" id="greenSlider"></div> 
+					<div class="input"> 
+						<input type="text" id="green">
+						<br/> 
+					</div>
+					<div class="badval" id="gbadval">
+						<p>Invalid Input: Requires numeric value in range 0 - 255</p>
+					</div>
+				</div>
+				<div class="pair">
+					<div class="slider" id="blueSlider"></div> 
+					<div class="input"> 
+						<input type="text" id="blue">
+						<br/> 
+					</div>
+					<div class="badval" id="bbadval">
+						<p>Invalid Input: Requires numeric value in range 0 - 255</p>
+					</div>
+				</div>
+			</form>			
+			<button id="gotItButton" onclick="gotItClick()">Got it!</button>
+			<button id="nextButton" onclick="nextClick()">Next!</button>
 		</div>
-
-		<form> 
-			<div class="pair">
-				<div class="slider" id="redSlider"></div> 
-				<div class="input"> 
-					<input type="text" id="red">
-					<br/>
-				</div>
-				<div class="badval" id="rbadval">
-					<p>Invalid Input: Requires numeric value in range 0 - 255</p>
-				</div>
-			</div>
-			<div class="pair">
-				<div class="slider" id="greenSlider"></div> 
-				<div class="input"> 
-					<input type="text" id="green">
-					<br/> 
-				</div>
-				<div class="badval" id="gbadval">
-					<p>Invalid Input: Requires numeric value in range 0 - 255</p>
-				</div>
-			</div>
-			<div class="pair">
-				<div class="slider" id="blueSlider"></div> 
-				<div class="input"> 
-					<input type="text" id="blue">
-					<br/> 
-				</div>
-				<div class="badval" id="bbadval">
-					<p>Invalid Input: Requires numeric value in range 0 - 255</p>
-				</div>
-			</div>
-		</form>
-
-		<div id="timer"></div>
-		<button id="gotItButton" onclick="gotItClick()">Got it!</button>
-		<button id="nextButton" onclick="nextClick()">Next!</button>
-		<div id="guessedSwatches"></div>		
+		<div id="rightSide">
+			<div id="guessedSwatches"></div>			
+		</div>		
 	</div>
 
-	<script type="text/javascript">
-	$(function() {
-		$( ".slider" ).slider({min: 0, max:255});
-	});
-	</script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script type="text/javascript" src="timer.js"></script>	
 	<script type="text/javascript" src="NewScore.js"></script>
 	<script type="text/javascript" src="GetHighscores.js"></script>
 	<script type="text/javascript" src="slider-input.js"></script>
