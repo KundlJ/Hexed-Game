@@ -135,8 +135,6 @@ function gotItClick()
     numTurns--;
 
     //Update score in the HTML and display what the user's guessed color looks like along with error %'s
-    $('').html('<p>Difficulty: ' + difficulty + '</p><p>Number of Turns: ' + numTurns + '</p>'
-    	+ '<p>Score: ' + finalScore);
     $('#guessedSwatches').append('<div class="userSwatch"></div>');
     $('.userSwatch:last').append('<div class="userColor"></div>');
     $('.userSwatch:last').append('<p>R:' + percentR + '% off G:' + percentG + '% off B:' + percentB + '% off' +
