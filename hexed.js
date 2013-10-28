@@ -5,274 +5,81 @@
 	{
 		//Global variables
 		var settings = {
-			difficulty: 5,
+			difficulty: 5, 	//Default values if no options provided
 			numTurns: 10
 		};
-
 		//If user passes in options parameter, rewrite the settings variable
 		if(options) {
 			$.extend(settings, options);
 		}
+		
+		var difficulty = settings.difficulty;
+		var numTurns = settings.numTurns; 
+		var swatchR;
+		var swatchG;
+		var swatchB;
+		var finalScore = 0;
+		var time = 0;		
+
+		//Timer class
+		var Timer = function() 
+		{
+			//EVENTS
+			this.Interval = 1000; //1 second intervals
+			this.Enable = new Boolean(false); //to start/stop itmer
+			
+			//PRIVATE VARIABLES
+			var timerId = 0; // to use for setInterval	
+			
+			
+			//PUBLIC FUNCTIONS
+			Tick = function() 
+		    {
+		    	time = time + 1;
+		    	if(time < 10)
+		    	{
+		    		$('#timer').html("Time: " + "0" + time + " sec");
+		    	}
+		    	else
+		    	{
+		    		$('#timer').html("Time: " + time + " sec");
+		    	}    	 
+		    }
+
+			// start timer
+			this.Start = function() 
+			{
+				this.Enable = new Boolean(true);		
+				if (this.Enable) {
+					this.timerId = setInterval(function(){this.Tick();},this.Interval);
+				}            //setInterval gives what to do at each interval of alotted time
+			};
+
+			// stop timer 
+			this.Stop = function() 
+			{
+				this.Enable = new Boolean(false);
+				clearInterval(this.timerId);
+			};
+
+			this.Restart = function() 
+			{
+		        this.Enable = new Boolean(true);
+		        if (this.Enable) 
+		        {
+		            time = 0;
+		    	}
+		    }    
+		};
+		var obj = new Timer();
 
 		return this.each(function () 
 		{
-			 $(this).html('<head><meta charset="utf-8"><title>Hexed!</title><link rel="stylesheet" type="text/css" href="hexed.css"><link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/></head><div id="all" onload="obj.Start()"><div id="leftSide"><header><h1>Hexed!</h1><div id="timer"></div><div id="settings"></div></header><div id="swatch"><div id="endOfGame"><p id="endOfGameText">End of Game!</p><div id="scoreName"><p id="finalScore">Final Score: </p><br/><button class="endOfGameButtons" id="playAgain">Play Again</button><br/><p id="name">Name:</p><input type="text" id="nameText"/><button class="endOfGameButtons" id="addScore">Add my score</button></div><form action="Team6Scores.html" method="get"><button class="endOfGameButtons" id="viewScores">View High Scores</button></form></div><br/></div><form><div class="pair"><div class="slider" id="redSlider"></div><div class="input"><input type="text" id="red"><br/></div><div class="badval" id="rbadval"><p>Invalid Input: Requires numeric value in range 0 - 255</p></div></div><div class="pair"><div class="slider" id="greenSlider"></div><div class="input"><input type="text" id="green"><br/></div><div class="badval" id="gbadval"><p>Invalid Input: Requires numeric value in range 0 - 255</p></div></div><div class="pair"><div class="slider" id="blueSlider"></div><div class="input"><input type="text" id="blue"><br/></div><div class="badval" id="bbadval"><p>Invalid Input: Requires numeric value in range 0 - 255</p></div></div></form><button id="gotItButton">Got it!</button><button id="nextButton">Next!</button></div><div id="rightSide"><div id="guessedSwatches"></div></div></div><script src="http://code.jquery.com/jquery-1.9.1.js"></script><script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>');
-
-
-var difficulty;
-var numTurns; 
-var swatchR;
-var swatchG;
-var swatchB;
-var finalScore;
-var time = 0;
+			 $(this).html('<head><meta charset="utf-8"><title>Hexed!</title><link rel="stylesheet" type="text/css" href="hexed.css"><link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/></head><div id="all"><div id="leftSide"><header><h1>Hexed!</h1><button id="start">Start Game!</button><div id="timer"></div><div id="settings"></div></header><div id="swatch"><div id="endOfGame"><p id="endOfGameText">End of Game!</p><div id="scoreName"><p id="finalScore">Final Score: </p><br/><button class="endOfGameButtons" id="playAgain">Play Again</button><br/><p id="name">Name:</p><input type="text" id="nameText"/><button class="endOfGameButtons" id="addScore">Add my score</button></div><form action="Team6Scores.html" method="get"><button class="endOfGameButtons" id="viewScores">View High Scores</button></form></div><br/></div><form><div class="pair"><div class="slider" id="redSlider"></div><div class="input"><input type="text" id="red"><br/></div><div class="badval" id="rbadval"><p>Invalid Input: Requires numeric value in range 0 - 255</p></div></div><div class="pair"><div class="slider" id="greenSlider"></div><div class="input"><input type="text" id="green"><br/></div><div class="badval" id="gbadval"><p>Invalid Input: Requires numeric value in range 0 - 255</p></div></div><div class="pair"><div class="slider" id="blueSlider"></div><div class="input"><input type="text" id="blue"><br/></div><div class="badval" id="bbadval"><p>Invalid Input: Requires numeric value in range 0 - 255</p></div></div></form><button id="gotItButton">Got it!</button><button id="nextButton">Next!</button></div><div id="rightSide"><div id="guessedSwatches"></div></div></div><script src="http://code.jquery.com/jquery-1.9.1.js"></script><script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>');
 
 //SCRIPTS	
-//Timer class
-var Timer = function() 
-{
-	//EVENTS
-	this.Interval = 1000; //1 second intervals
-	this.Enable = new Boolean(false); //to start/stop itmer
-	this.Tick; //to further the time
-	//PRIVATE VARIABLES
-	var timerId = 0; // to use for setInterval
-	var thisObject; //to refer to self
-	
-	//PUBLIC FUNCTIONS
-	// start timer
-	this.Start = function() 
-	{
-		this.Enable = new Boolean(true);
-		thisObject = this;
-		if (thisObject.Enable) {
-			thisObject.timerId = setInterval(function(){thisObject.Tick();},thisObject.Interval);
-		}            //setInterval gives what to do at each interval of alotted time
-	};
 
-	// stop timer 
-	this.Stop = function() 
-	{
-		thisObject.Enable = new Boolean(false);
-		clearInterval(thisObject.timerId);
-	};
-
-	this.Restart = function() 
-	{
-        thisObject.Enable = new Boolean(true);
-        if (thisObject.Enable) 
-        {
-            time = 0;
-    	}
-    }
-
-    this.Tick = function() 
-    {
-    	time = time + 1;
-    	if(time < 10)
-    	{
-    		document.getElementById("timer").innerHTML = "Time: " + "0" + time + " sec";
-    	}
-    	else
-    	{
-    		document.getElementById("timer").innerHTML = "Time: " + time + " sec";	
-    	}    	 
-    }
-};
-
-var obj = new Timer();
-
-//High score functionality
-function supports_html5_storage() {
-  try {
-    return 'localStorage' in window && window['localStorage'] !== null;
-  } catch (e) {
-    return false;
-  }
-}
-
-function sortByScoreAndDate(array) {
-    return array.sort(function(a, b) {
-        var xScore = a["score"]; 
-        var xDate = a["date"];
-        
-        var yScore = b["score"]; 
-        var yDate = b["date"];
-        
-        if(xScore < yScore)
-        {
-          return 1;
-        }
-        else
-        {
-          if( xScore > yScore)
-          {
-            return -1;
-          }
-          else
-          {
-            if( xDate < yDate)
-            {
-              return 1;
-            }
-            else
-            {
-              if( xDate > yDate)
-              {
-                return -1;
-              }
-              else
-              {
-                return 0;
-              }
-            }
-          }
-        }
-        return 0;
-    });
-}
-
-//Adds a JSON score object to the local storage
-function AddNewScoreJS(newScore)
-{
-  if(supports_html5_storage())
-  {
-    var ScoresString = localStorage["HexedHighscores"];
-    //If Data Exists, add the new value, otherwise handle creating it
-    if(ScoresString)
-    {
-      var Data = JSON.parse(ScoresString);
-      var Scores = Data.HighScores;
-      Scores.push(newScore);
-      //Sort result
-      Scores = sortByScoreAndDate(Scores);
-      
-      Data.HighScores = Scores;
-      //Store result
-      localStorage["HexedHighscores"] = JSON.stringify(Data);
-    }
-    else
-    {
-      var Scores = new Array();
-      Scores[0] = newScore;
-      var Data = { "HighScores": Scores };
-      localStorage["HexedHighscores"] = JSON.stringify(Data);
-    }
-  }
-  else
-  {
-    alert("Does not support local storage");
-  }
-}
-//Adds a new score to local storage based on elements
-//Name: Player name, a simple string
-//Difficulty: The difficulty of the game
-//Turns: turns taken to complete
-//Score
-//time: In the form "YEAR-MO-DA, eg 2000-05-30"
-function AddNewScore(name, difficulty, turns, score, time)
-{
-  var NewScore =  {
-          "name"        : name,       
-          "difficulty"  : difficulty,
-          "turns"       : turns,
-          "score"       : score,
-          "timestamp"   : time    
-  };
-  AddNewScoreJS(NewScore);
-}
-
-//Getting high scores
-function supports_html5_storage() {
-  try {
-    return 'localStorage' in window && window['localStorage'] !== null;
-  } catch (e) {
-    return false;
-  }
-}
-
-function EraseHighScores() {
-  localStorage.removeItem("HexedHighscores");
-}
-
-function DisplayHighScores() {
-  if(supports_html5_storage())
-  {
-    /*
-      Temporarily force data into local storage
-      until can retrieve from game
-    */
-    var testJSON = { "HighScores": [    
-          {
-            "name"        : "Jed",
-            "difficulty"  : "hard",
-            "turns"       : 5,
-            "score"       : 9001,
-            "timestamp"   : "2013-10-18"
-          },     
-          {
-            "name"        : "Drew",
-            "difficulty"  : "easy",
-            "turns"       : 10,
-            "score"       : 1337,
-            "timestamp"   : "2013-10-15"
-          }     
-      ]
-    };
-    
-    //localStorage.setItem("HexedHighscores", JSON.stringify(testJSON));
-      
-    //////////////////////////////////////////////////////////////////
-    
-    if(localStorage["HexedHighscores"])
-    {
-      var ScoresString = localStorage["HexedHighscores"];
-      
-      var Data = JSON.parse(ScoresString);
-      var Scores = Data.HighScores;
-      
-      for(var i = 0; i < Scores.length; i++)
-      {
-        var thisScore = Scores[i];
-        
-        var nameData = thisScore.name;
-        var difficultyData = thisScore.difficulty;
-        var turnsData = thisScore.turns;
-        var scoreData = thisScore.score;
-        var timestampData = thisScore.timestamp;
-        
-        var newScore = $('<li></li>').appendTo(".HighScores");
-        newScore.attr('class', 'Score');
-        
-        var dataList = $('<ul></ul>').appendTo(newScore);
-        dataList.attr('class', 'DataList');
-        
-        var Name = $('<li>' + nameData + '</li>').appendTo(dataList);
-        Name.attr('class', 'Name');
-        
-        var Score = $('<li>' + scoreData + '</li>').appendTo(dataList);
-        Score.attr('class', 'Score');
-        
-        var Difficulty = $('<li>' + difficultyData + '</li>').appendTo(dataList);
-        Difficulty.attr('class', 'Difficulty');
-        
-        var Turns = $('<li>' + turnsData + '</li>').appendTo(dataList);
-        Turns.attr('class', 'Turns');
-        
-        var Timestamp = $('<li>' + timestampData + '</li>').appendTo(dataList);
-        Timestamp.attr('class', 'Timestamp');
-      }
-    }
-    else
-    {
-      alert("No Saved High Scores");
-    }
-  }
-  else
-  {
-    alert("Local Data Not Functioning");
-  }
-}
+//Utilities
 
 //Helper method to display new random color in the swatch
 function randomColor()
@@ -285,7 +92,7 @@ function randomColor()
 	$('#swatch').css("background-color", '#' + hexColor);		
 }
 
-	//Helper method to error check RGB user inputs
+//Helper method to error check RGB user inputs
 function isInvalid(num) {
 	return ((isNaN(num)) || num < 0 || num > 255);
 }
@@ -312,7 +119,6 @@ function rgbToHex(r, g, b)
 	return "#" + rString.toUpperCase() + gString.toUpperCase() + bString.toUpperCase();
 }
 
-
 //When number of turns hits 0, display user's score, option to play again, and
 //viewing/adding high scores.
 function endOfGame()
@@ -324,6 +130,7 @@ function endOfGame()
     $('#endOfGame').css('display', 'block');
     $('#finalScore').append(finalScore);
 }
+
 //Onclick method for 'Play Again' button
 //Restarts the game by hiding scoreboard/play again buttons, resetting score & slider inputs, 
 //enabling 'Got It!' and 'Next!' buttons, and putting random color in swatch
@@ -341,6 +148,8 @@ function playAgainClick()
 	obj.Start();
 	obj.Restart();
 }
+
+//Onclick method for 'Add My Score' button
 //Adds new score to the table and displays the high scores
 function newScore()
 {
@@ -358,6 +167,7 @@ function newScore()
 
 	$('#viewScores').click();
 }
+
 //Resets sliders and textboxes to 128
 function resetInputs()
 {
@@ -368,6 +178,26 @@ function resetInputs()
 	$('#green').val(128);
 	$('#blue').val(128);
 }
+//======
+
+//Event listeners
+
+//Initialization
+onload = function(e)
+{
+	document.getElementById('gotItButton').disabled = true;
+    document.getElementById('nextButton').disabled = true;
+	$('#swatch').css('background-color', 'white');
+}
+
+$('#start').click(function()
+{	
+	$('#start').css('display', 'none');
+	document.getElementById('gotItButton').disabled = false;
+    document.getElementById('nextButton').disabled = false;
+	randomColor(); 
+	obj.Start();
+});
 
 //Onclick method for 'Got It!' button
 //Computes user's score based off how % wrong their RGB guesses were. 
@@ -512,18 +342,19 @@ $("#blueSlider").on("slide", function(event, ui) {
 });
 //=================		
 
-difficulty = settings.difficulty;
-numTurns = settings.numTurns; 
-finalScore = 0;
-
 //Error check difficulty value
 if(difficulty > 10 || difficulty < 0 || isNaN(difficulty)) 
 {
+	$('#redSlider').slider("value", 128);
+	$('#greenSlider').slider("value", 128);
+	$('#blueSlider').slider("value", 128);
+	$('#red').val(128);
+	$('#green').val(128);
+	$('#blue').val(128);
 	alert('Difficulty has been set to an illegal value. Must be a number in the 0-10 range');
 	return null;
 }
 
-randomColor();
 $('.slider').slider({max: 255});
 $('.slider').slider({min: 0});
 $('.slider').slider({
@@ -535,7 +366,202 @@ $('#blueSlider').css('background', 'rgb(0,0,255)');
 resetInputs();
 
 $('#settings').html('<p>Difficulty: ' + difficulty + '</p><p>Number of Turns: ' + numTurns + '</p>'
-	+ '<p>Score: --</p>'); 
+	+ '<p>Score: --</p>');
+
+//High score functionality
+function supports_html5_storage() {
+  try {
+    return 'localStorage' in window && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
+}
+
+function sortByScoreAndDate(array) {
+    return array.sort(function(a, b) {
+        var xScore = a["score"]; 
+        var xDate = a["date"];
+        
+        var yScore = b["score"]; 
+        var yDate = b["date"];
+        
+        if(xScore < yScore)
+        {
+          return 1;
+        }
+        else
+        {
+          if( xScore > yScore)
+          {
+            return -1;
+          }
+          else
+          {
+            if( xDate < yDate)
+            {
+              return 1;
+            }
+            else
+            {
+              if( xDate > yDate)
+              {
+                return -1;
+              }
+              else
+              {
+                return 0;
+              }
+            }
+          }
+        }
+        return 0;
+    });
+}
+
+//Adds a JSON score object to the local storage
+function AddNewScoreJS(newScore)
+{
+  if(supports_html5_storage())
+  {
+    var ScoresString = localStorage["HexedHighscores"];
+    //If Data Exists, add the new value, otherwise handle creating it
+    if(ScoresString)
+    {
+      var Data = JSON.parse(ScoresString);
+      var Scores = Data.HighScores;
+      Scores.push(newScore);
+      //Sort result
+      Scores = sortByScoreAndDate(Scores);
+      
+      Data.HighScores = Scores;
+      //Store result
+      localStorage["HexedHighscores"] = JSON.stringify(Data);
+    }
+    else
+    {
+      var Scores = new Array();
+      Scores[0] = newScore;
+      var Data = { "HighScores": Scores };
+      localStorage["HexedHighscores"] = JSON.stringify(Data);
+    }
+  }
+  else
+  {
+    alert("Does not support local storage");
+  }
+}
+
+//Adds a new score to local storage based on elements
+//Name: Player name, a simple string
+//Difficulty: The difficulty of the game
+//Turns: turns taken to complete
+//Score
+//time: In the form "YEAR-MO-DA, eg 2000-05-30"
+function AddNewScore(name, difficulty, turns, score, time)
+{
+  var NewScore =  {
+          "name"        : name,       
+          "difficulty"  : difficulty,
+          "turns"       : turns,
+          "score"       : score,
+          "timestamp"   : time    
+  };
+  AddNewScoreJS(NewScore);
+}
+
+//Getting high scores
+function supports_html5_storage() {
+  try {
+    return 'localStorage' in window && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
+}
+
+function EraseHighScores() {
+  localStorage.removeItem("HexedHighscores");
+}
+
+function DisplayHighScores() {
+  if(supports_html5_storage())
+  {
+    /*
+      Temporarily force data into local storage
+      until can retrieve from game
+    */
+    var testJSON = { "HighScores": [    
+          {
+            "name"        : "Jed",
+            "difficulty"  : "hard",
+            "turns"       : 5,
+            "score"       : 9001,
+            "timestamp"   : "2013-10-18"
+          },     
+          {
+            "name"        : "Drew",
+            "difficulty"  : "easy",
+            "turns"       : 10,
+            "score"       : 1337,
+            "timestamp"   : "2013-10-15"
+          }     
+      ]
+    };
+    
+    //localStorage.setItem("HexedHighscores", JSON.stringify(testJSON));
+      
+    //////////////////////////////////////////////////////////////////
+    
+    if(localStorage["HexedHighscores"])
+    {
+      var ScoresString = localStorage["HexedHighscores"];
+      
+      var Data = JSON.parse(ScoresString);
+      var Scores = Data.HighScores;
+      
+      for(var i = 0; i < Scores.length; i++)
+      {
+        var thisScore = Scores[i];
+        
+        var nameData = thisScore.name;
+        var difficultyData = thisScore.difficulty;
+        var turnsData = thisScore.turns;
+        var scoreData = thisScore.score;
+        var timestampData = thisScore.timestamp;
+        
+        var newScore = $('<li></li>').appendTo(".HighScores");
+        newScore.attr('class', 'Score');
+        
+        var dataList = $('<ul></ul>').appendTo(newScore);
+        dataList.attr('class', 'DataList');
+        
+        var Name = $('<li>' + nameData + '</li>').appendTo(dataList);
+        Name.attr('class', 'Name');
+        
+        var Score = $('<li>' + scoreData + '</li>').appendTo(dataList);
+        Score.attr('class', 'Score');
+        
+        var Difficulty = $('<li>' + difficultyData + '</li>').appendTo(dataList);
+        Difficulty.attr('class', 'Difficulty');
+        
+        var Turns = $('<li>' + turnsData + '</li>').appendTo(dataList);
+        Turns.attr('class', 'Turns');
+        
+        var Timestamp = $('<li>' + timestampData + '</li>').appendTo(dataList);
+        Timestamp.attr('class', 'Timestamp');
+      }
+    }
+    else
+    {
+      alert("No Saved High Scores");
+    }
+  }
+  else
+  {
+    alert("Local Data Not Functioning");
+  }
+}
+//=======
+
 });
 };
 })(jQuery);
